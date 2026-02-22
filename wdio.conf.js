@@ -1,3 +1,6 @@
+const path = require('path');
+
+
 exports.config = {
     //
     // ====================
@@ -27,6 +30,15 @@ exports.config = {
     exclude: [
         // 'path/to/excluded/files'
     ],
+    suites: {
+        jp: [
+            './features/**/login.feature',
+            './features/**/testDatasharing.feature'
+        ],
+        otherFeature: [
+            // ...
+        ]
+    },
     //
     // ============
     // Capabilities
@@ -52,6 +64,7 @@ exports.config = {
     capabilities: [{
         browserName: 'chrome'
     }],
+     
 
     //
     // ===================
@@ -125,10 +138,12 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter
     reporters: ['spec'],
 
+    
+
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./features/step-definitions/steps.js'],
+        require: ['./features/step-definitions/*.js'],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -146,7 +161,8 @@ exports.config = {
         // <boolean> fail if there are any undefined or pending steps
         strict: false,
         // <string> (expression) only execute the features or scenarios with tags matching the expression
-        tagExpression: '@testing',
+       // tagExpression: '@test',
+       tagExpression: process.env.TAGS || '',
         // <number> timeout for step definitions
         timeout: 60000,
         // <boolean> Enable this config to treat undefined definitions as warnings.

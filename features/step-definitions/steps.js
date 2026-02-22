@@ -36,5 +36,14 @@ Then("I should able to see the site up and running with out issue", () => {
 });
 
 Then("I should able to see the site up and running with some issue", () => {
-    console.log("Inside - then ")
+    console.log("Inside - then ");
+    const title = "expected";
+    expect(title).toBe("cool");
+});
+
+
+Given("I am on the entering in the home page with user {string}", function(username) {
+    this.sharedData = {};                 // initialize sharedData
+    this.sharedData.username = username;  // store username
+    console.log(this.sharedData.username + " From Given");
 });
